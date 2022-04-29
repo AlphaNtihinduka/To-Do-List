@@ -1,7 +1,5 @@
 # To-Do-List
 
-
-
 > The project focused on creating To do list structure
 
 ## Built With
