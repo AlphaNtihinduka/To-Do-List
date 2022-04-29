@@ -1,0 +1,82 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "poppins", sans-serif;
+  background-color: rgb(238, 238, 238);
+}
+
+.do-list-parent {
+  max-width: 400px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4);
+  margin: 150px auto;
+  background-color: #fff;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 2px solid grey;
+  color: rgb(110, 104, 104);
+}
+
+.title {
+  font-weight: bold;
+}
+
+.task-input-container {
+  position: relative;
+}
+
+.task-input {
+  width: 100%;
+  padding: 15px 0 15px 15px;
+  border: none;
+}
+
+.task-input::placeholder {
+  font-style: italic;
+  font-size: 14px;
+}
+
+.enter-icon {
+  position: absolute;
+  right: 10px;
+  top: 30%;
+  color: grey;
+  height: 15px;
+}
+
+.task-list {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid grey;
+  padding: 15px;
+  font-size: 15px;
+  align-items: center;
+}
+
+.label-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.task-name {
+  padding-left: 8px;
+}
+
+.more-icon {
+  color: grey;
+}
+
+.clear-completed {
+  font-size: 18px;
+  color: grey;
+  border-top: 1px solid grey;
+  padding: 15px;
+  text-align: center;
+}
