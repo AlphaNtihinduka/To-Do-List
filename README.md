@@ -9,7 +9,7 @@
 ​
 ## Live Demo (if available)
 
-- https://alphantihinduka.github.io/Alpha-Mobile-portifolio/
+- Live Demo: [@Live demo link](https://alphantihinduka.github.io/To-Do-List/dist/);
 
 ## Getting Started
 
