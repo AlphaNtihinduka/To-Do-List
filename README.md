@@ -17,7 +17,6 @@
 
 -Used the microverse linter documentation
 
-
 -set up linter for HTML and CSS
 
 -Install eslintrc.json.
