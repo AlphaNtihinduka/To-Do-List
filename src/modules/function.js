@@ -1,21 +1,20 @@
-import {taskContainer, taskInput, clearComplete} from "./variable.js";
+import { taskContainer, taskInput } from './variable.js';
 
 let editIndex;
 let isEditedTask = false;
-//getting localStorage tasks
-let localTasks = JSON.parse(localStorage.getItem("tasks"));
-function completionStatus(selectedTask) {}
+// getting localStorage tasks
+let localTasks = JSON.parse(localStorage.getItem('tasks'));
+
 function editTask(taskId, editName) {
-  console.log();
   editIndex = taskId;
   isEditedTask = true;
   taskInput.value = editName;
 }
 function tasksDisplay() {
-  let li = "";
+  let li = '';
   if (localTasks) {
     localTasks.forEach((task, id) => {
-      let isCompleted = task.completed == true ? "checked" : "";
+      const isCompleted = task.completed === true ? 'checked' : '';
       li += `
         <li class="task-list">
         <label for="${id}" class="label-checkbox">
@@ -34,12 +33,12 @@ function tasksDisplay() {
     });
   }
   taskContainer.innerHTML = li;
-  document.querySelectorAll(".edit").forEach((el) => {
-    el.addEventListener("click", (element) => {
+  document.querySelectorAll('.edit').forEach((el) => {
+    el.addEventListener('click', (element) => {
       editIndex = element.target.id;
       isEditedTask = true;
-      taskInput.value = JSON.parse(localStorage.getItem("tasks")).filter(
-        (element, index) => index == editIndex
+      taskInput.value = JSON.parse(localStorage.getItem('tasks')).filter(
+        (element, index) => index == editIndex,
       )[0].description;
     });
   });
@@ -50,45 +49,42 @@ function tasksDisplay() {
       localStorage.setItem('Tasks', JSON.stringify(localTasks));
     });
   }
-  
-  document.querySelectorAll(".fa-trash").forEach((el) => {
-    console.log("deleted", el);
-    el.addEventListener("click", (deleteIndex) => {
-      console.log("deleteIndex", deleteIndex)
+
+  document.querySelectorAll('.fa-trash').forEach((el) => {
+    el.addEventListener('click', (deleteIndex) => {
       const start = deleteIndex.target;
-      console.log("start number",start);
       const deleteTasks = parseInt(start.id, 10);
 
       localTasks.splice(deleteTasks, 1);
       tasksDisplay();
-      resetIndex()
-      localStorage.setItem("tasks", JSON.stringify(localTasks));
+      resetIndex();
+      localStorage.setItem('tasks', JSON.stringify(localTasks));
     });
   });
 
- // for day4
-  document.querySelectorAll(".check-input").forEach((el) => {
-    el.addEventListener("click", (selectedTask) => {
-      let taskName = selectedTask.target.parentElement.lastElementChild;
+  // for day4
+  document.querySelectorAll('.check-input').forEach((el) => {
+    el.addEventListener('click', (selectedTask) => {
+      const taskName = selectedTask.target.parentElement.lastElementChild;
       if (selectedTask.target.checked) {
-        taskName.classList.add("checked");
+        taskName.classList.add('checked');
         localTasks[selectedTask.target.id].completed = true;
       } else {
-        taskName.classList.remove("checked");
+        taskName.classList.remove('checked');
         localTasks[selectedTask.target.id].completed = false;
       }
-      localStorage.setItem("tasks", JSON.stringify(localTasks));
+      localStorage.setItem('tasks', JSON.stringify(localTasks));
     });
   });
   //
-  document.querySelectorAll(".more-icon").forEach((el) => {
-    el.addEventListener("click", (selectedTask) => {
-      let deleteEditUl = selectedTask.target.parentElement.lastElementChild;
-      deleteEditUl.classList.add("show");
-      //Removing a class
-      document.addEventListener("click", (e) => {
-        if (e.target.tagName != "I" || e.target != selectedTask.target) {
-          deleteEditUl.classList.remove("show");
+  document.querySelectorAll('.more-icon').forEach((el) => {
+    el.addEventListener('click', (selectedTask) => {
+      const deleteEditUl = selectedTask.target.parentElement.lastElementChild;
+      deleteEditUl.classList.add('show');
+      // Removing a class
+      document.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'I' || e.target !== selectedTask.target) {
+          deleteEditUl.classList.remove('show');
         }
       });
     });
@@ -96,13 +92,13 @@ function tasksDisplay() {
 }
 tasksDisplay();
 function showDeleteEdit(selectedTask) {
-  //getting Delete edit ul
-  let deleteEditUl = selectedTask.parentElement.lastElementChild;
-  deleteEditUl.classList.add("show");
-  //Removing a class
-  document.addEventListener("click", (e) => {
-    if (e.target.tagName != "I" || e.target != selectedTask) {
-      deleteEditUl.classList.remove("show");
+  // getting Delete edit ul
+  const deleteEditUl = selectedTask.parentElement.lastElementChild;
+  deleteEditUl.classList.add('show');
+  // Removing a class
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName !== 'I' || e.target !== selectedTask) {
+      deleteEditUl.classList.remove('show');
     }
   });
 }
@@ -116,19 +112,20 @@ function deleteTask(deleteIndex) {
     localTasks[i].index -= 1;
   }
   localTasks.splice(deleteIndex, 1);
-  localStorage.setItem("tasks", JSON.stringify(localTasks));
+  localStorage.setItem('tasks', JSON.stringify(localTasks));
   tasksDisplay();
 }
-taskInput.addEventListener("keyup", (e) => {
-  let EnteredTask = taskInput.value.trim();
-  if (e.key === "Enter" && EnteredTask) {
+
+taskInput.addEventListener('keyup', (e) => {
+  const EnteredTask = taskInput.value.trim();
+  if (e.key === 'Enter' && EnteredTask) {
     if (!isEditedTask) {
       if (!localTasks) {
         localTasks = [];
       }
-      const arrayStore = JSON.parse(localStorage.getItem("tasks")) || [];
-      let arrayLength = arrayStore.length;
-      let taskInfo = {
+      const arrayStore = JSON.parse(localStorage.getItem('tasks')) || [];
+      const arrayLength = arrayStore.length;
+      const taskInfo = {
         description: EnteredTask,
         completed: false,
         index: arrayLength + 1,
@@ -138,8 +135,9 @@ taskInput.addEventListener("keyup", (e) => {
       isEditedTask = false;
       localTasks[editIndex].description = EnteredTask;
     }
-    taskInput.value = "";
-    localStorage.setItem("tasks", JSON.stringify(localTasks));
+    taskInput.value = '';
+    localStorage.setItem('tasks', JSON.stringify(localTasks));
+
     tasksDisplay();
   }
 });
