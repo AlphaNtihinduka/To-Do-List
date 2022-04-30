@@ -13,13 +13,19 @@
 
 ## Getting Started
 
--Install webpack
+#To get a local copy up and running follow these simple steps:
 
--Used the microverse linter documentation
-
--set up linter for HTML and CSS
-
--Install eslintrc.json.
+-Open terminal and navigate to the folder you would like to put these files.
+-Type these commands into the terminal:
+-git clone https://github.com/rbanos-mv/todo-list.git
+-cd todo
+-npm install
+-To build the project with webpack
+    -npm run build
+-Open dist/index.html in you web browser.
+-To run the webpack dev server
+    -npm run start
+-Web browser will open on localhost:8080
 
 ## Authors
 
