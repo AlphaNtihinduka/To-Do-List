@@ -5,11 +5,6 @@ let isEditedTask = false;
 // getting localStorage tasks
 let localTasks = JSON.parse(localStorage.getItem('tasks'));
 
-function editTask(taskId, editName) {
-  editIndex = taskId;
-  isEditedTask = true;
-  taskInput.value = editName;
-}
 function tasksDisplay() {
   let li = '';
   if (localTasks) {
@@ -35,11 +30,14 @@ function tasksDisplay() {
   taskContainer.innerHTML = li;
   document.querySelectorAll('.edit').forEach((el) => {
     el.addEventListener('click', (element) => {
-      editIndex = element.target.id;
+      const taskIndex = element.target.id;
+      editIndex = taskIndex;
       isEditedTask = true;
-      taskInput.value = JSON.parse(localStorage.getItem('tasks')).filter(
-        (element, index) => index == editIndex,
+      const result = JSON.parse(localStorage.getItem('tasks')).filter(
+        (element, index) => index.toString() === taskIndex,
       )[0].description;
+
+      taskInput.value = result;
     });
   });
 
@@ -62,7 +60,6 @@ function tasksDisplay() {
     });
   });
 
-  // for day4
   document.querySelectorAll('.check-input').forEach((el) => {
     el.addEventListener('click', (selectedTask) => {
       const taskName = selectedTask.target.parentElement.lastElementChild;
@@ -91,33 +88,9 @@ function tasksDisplay() {
   });
 }
 tasksDisplay();
-function showDeleteEdit(selectedTask) {
-  // getting Delete edit ul
-  const deleteEditUl = selectedTask.parentElement.lastElementChild;
-  deleteEditUl.classList.add('show');
-  // Removing a class
-  document.addEventListener('click', (e) => {
-    if (e.target.tagName !== 'I' || e.target !== selectedTask) {
-      deleteEditUl.classList.remove('show');
-    }
-  });
-}
-
-//
-
-//
-function deleteTask(deleteIndex) {
-  const start = deleteIndex + 1;
-  for (let i = start; i < localTasks.length; i += 1) {
-    localTasks[i].index -= 1;
-  }
-  localTasks.splice(deleteIndex, 1);
-  localStorage.setItem('tasks', JSON.stringify(localTasks));
-  tasksDisplay();
-}
 
 taskInput.addEventListener('keyup', (e) => {
-  const EnteredTask = taskInput.value.trim();
+  const EnteredTask = taskInput.value;
   if (e.key === 'Enter' && EnteredTask) {
     if (!isEditedTask) {
       if (!localTasks) {
