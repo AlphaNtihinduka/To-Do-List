@@ -1,11 +1,12 @@
 # To-Do-List
 
-> The project focused on creating To do list structure
+> The project focused on creating To do list structure for organising the daily completed or non-completed activities.
 
 ## Built With
 - HTML
 - CSS
 -JAVASCRIPT
+-Webpack
 ​
 ## Live Demo (if available)
 
@@ -17,7 +18,7 @@
 
 -Open terminal and navigate to the folder you would like to put these files.
 -Type these commands into the terminal:
--git clone https://github.com/rbanos-mv/todo-list.git
+-git clone git@github.com:AlphaNtihinduka/To-Do-List.git
 -cd todo
 -npm install
 -To build the project with webpack
