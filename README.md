@@ -1,11 +1,12 @@
 # To-Do-List
 
-> The project focused on creating To do list structure
+> The project focused on creating To do list structure for organising the daily completed or non-completed activities.
 
 ## Built With
 - HTML
 - CSS
 -JAVASCRIPT
+-Webpack
 ​
 ## Live Demo (if available)
 
@@ -13,14 +14,19 @@
 
 ## Getting Started
 
--Install webpack
+#To get a local copy up and running follow these simple steps:
 
--Used the microverse linter documentation
-
-
--set up linter for HTML and CSS
-
--Install eslintrc.json.
+-Open terminal and navigate to the folder you would like to put these files.
+-Type these commands into the terminal:
+-git clone git@github.com:AlphaNtihinduka/To-Do-List.git
+-cd todo
+-npm install
+-To build the project with webpack
+    -npm run build
+-Open dist/index.html in you web browser.
+-To run the webpack dev server
+    -npm run start
+-Web browser will open on localhost:8080
 
 ## Authors
 

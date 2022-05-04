@@ -9,6 +9,14 @@ body {
   background-color: rgb(238, 238, 238);
 }
 
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
 .do-list-parent {
   max-width: 400px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4);
@@ -65,12 +73,46 @@ body {
   align-items: center;
 }
 
+.task-list .label-checkbox p.checked {
+  text-decoration: line-through;
+}
+
 .task-name {
   padding-left: 8px;
 }
 
+.more-container {
+  position: relative;
+}
+
 .more-icon {
   color: grey;
+  padding: 8px;
+}
+
+.delete-edit {
+  font-size: 17px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.more-container .delete-edit {
+  display: none;
+}
+
+.more-container .delete-edit.show {
+  display: block;
+}
+
+.fa-trash {
+  padding: 10px;
+}
+
+.edit {
+  padding: 10px;
+  background-color: orange;
 }
 
 .clear-completed {
@@ -79,4 +121,5 @@ body {
   border-top: 1px solid grey;
   padding: 15px;
   text-align: center;
+  cursor: pointer;
 }
