@@ -1,4 +1,5 @@
 import { taskContainer, taskInput } from './variable.js';
+import  clearCompleted from './complete.js'
 
 let editIndex;
 let isEditedTask = false;
@@ -88,14 +89,6 @@ function tasksDisplay() {
   });
 }
 tasksDisplay();
-
-const clearCompleted = document.querySelector('.clear-completed');
-clearCompleted.addEventListener('click', () => {
-  const storage = JSON.parse(localStorage.getItem('tasks'));
-  const notCompleted = storage.filter((item) => item.completed === false);
-  localStorage.setItem('tasks', JSON.stringify(notCompleted));
-  window.location.reload();
-});
 
 taskInput.addEventListener('keyup', (e) => {
   const EnteredTask = taskInput.value;
