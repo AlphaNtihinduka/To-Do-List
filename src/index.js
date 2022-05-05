@@ -1,3 +1,4 @@
 import './index.css';
 import './modules/variable.js';
 import './modules/function.js';
+import './modules/complete.js';
