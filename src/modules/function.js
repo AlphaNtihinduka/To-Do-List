@@ -1,5 +1,4 @@
 import { taskContainer, taskInput } from './variable.js';
-import  clearCompleted from './complete.js'
 
 let editIndex;
 let isEditedTask = false;
