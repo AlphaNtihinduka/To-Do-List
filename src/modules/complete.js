@@ -6,4 +6,4 @@ clearCompleted.addEventListener('click', () => {
   window.location.reload();
 });
 
-export default clearCompleted
+export default clearCompleted;
