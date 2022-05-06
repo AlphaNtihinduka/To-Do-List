@@ -44,7 +44,7 @@ function tasksDisplay() {
   function resetIndex() {
     localTasks.forEach((item, index) => {
       item.index = index + 1;
-      localStorage.setItem('Tasks', JSON.stringify(localTasks));
+      localStorage.setItem('tasks', JSON.stringify(localTasks));
     });
   }
 
@@ -114,3 +114,5 @@ taskInput.addEventListener('keyup', (e) => {
     tasksDisplay();
   }
 });
+
+// export default resetIndex

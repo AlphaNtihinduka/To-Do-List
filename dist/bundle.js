@@ -116,7 +116,17 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ \"./src/index.css\");\n/* harmony import */ var _modules_variable_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/variable.js */ \"./src/modules/variable.js\");\n/* harmony import */ var _modules_function_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/function.js */ \"./src/modules/function.js\");\n\n\n\n\n\n//# sourceURL=webpack://To-Do-List/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ \"./src/index.css\");\n/* harmony import */ var _modules_variable_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/variable.js */ \"./src/modules/variable.js\");\n/* harmony import */ var _modules_function_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/function.js */ \"./src/modules/function.js\");\n/* harmony import */ var _modules_complete_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/complete.js */ \"./src/modules/complete.js\");\n\n\n\n\n\n\n//# sourceURL=webpack://To-Do-List/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/complete.js":
+/*!*********************************!*\
+  !*** ./src/modules/complete.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction resetIndexComplete() {\n    localTasks.forEach((item, index) => {\n      item.index = index + 1;\n      localStorage.setItem('Tasks', JSON.stringify(localTasks));\n    });\n  }\n\nconst clearCompleted = document.querySelector('.clear-completed');\nclearCompleted.addEventListener('click', () => {\n  const storage = JSON.parse(localStorage.getItem('tasks'));\n  const notCompleted = storage.filter((item) => item.completed === false);\n  localStorage.setItem('tasks', JSON.stringify(notCompleted));\n  window.location.reload();\n  resetIndexComplete();\n});\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (clearCompleted);\n\n//# sourceURL=webpack://To-Do-List/./src/modules/complete.js?");
 
 /***/ }),
 
