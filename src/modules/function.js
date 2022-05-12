@@ -28,6 +28,7 @@ function tasksDisplay() {
     });
   }
   taskContainer.innerHTML = li;
+
   document.querySelectorAll('.edit').forEach((el) => {
     el.addEventListener('click', (element) => {
       const taskIndex = element.target.id;
@@ -89,8 +90,9 @@ function tasksDisplay() {
 }
 tasksDisplay();
 
-taskInput.addEventListener('keyup', (e) => {
-  const EnteredTask = taskInput.value;
+
+export const addTasks = (e) => {
+  const EnteredTask = taskInput.value.trim();
   if (e.key === 'Enter' && EnteredTask) {
     if (!isEditedTask) {
       if (!localTasks) {
@@ -113,6 +115,6 @@ taskInput.addEventListener('keyup', (e) => {
 
     tasksDisplay();
   }
-});
+}
 
-// export default resetIndex
+taskInput.addEventListener("keyup", addTasks)
