@@ -1,4 +1,5 @@
-import { addTasks } from "../function.js";
+import { addTasks, removeTask, setTaskList, taskList } from "../function.js";
+import { taskContainer } from '../variable.js';
 
 const html = `<div class="do-list-parent">
 <div class="heading">
@@ -6,16 +7,13 @@ const html = `<div class="do-list-parent">
     <i class="fa fa-refresh"></i>
 </div>
 <div class="task-input-container">
-    <input type="text" placeholder="Add to your list..." class="task-input">
+    <input type="text" value="This is a task" class="task-input">
     <img src="https://p7.hiclipart.com/preview/951/481/305/computer-icons-enter-key-arrow-arrow-material.jpg" alt="enter" class="enter-icon">
 </div>
 <ul class="task-container">
 </ul>
 <p class="clear-completed">Clear all completed</p>
 </div>`;
-
-document.body.innerHTML = html;
-console.log(document.body.innerHTML)
 
 const li = `<li class="task-list">
     <label for="id" class="label-checkbox">
@@ -25,25 +23,50 @@ const li = `<li class="task-list">
     <div class="more-container" >
     <i class="fa fa-ellipsis-v more-icon" "></i>
     <ul class="delete-edit">
-    <li><i class="fa fa-trash"  id="id"></i></li>
-    <li class="edit" id="id" ">Edit</li>
+    <li><i class="fa fa-trash"  id="trashBtn"></i></li>
+    <li class="edit" id="editBtn" ">Edit</li>
     </ul>
     </div>
 </li>`;
 
 describe("The addition and removal of tasks", () => {
     test("Adding tasks", () => {
-        addTasks({
-            description: "This is the first",
-            completed: false,
-            index: 1
-        });
-        expect(addTasks()).toEqual([{
-            description: "This is the first",
-            completed: false,
-            index: 1
-        }])
+        document.body.innerHTML = html;
+        const event ={ key: 'Enter' }
+
+        addTasks(event);
+
+        const list = taskList();
+        expect(list).toBeDefined();
+        expect(list).toHaveLength(1);
+        expect(list[0]).toEqual({
+          description: "This is a task",
+          completed: false,
+          index: 1,
+        })
     })
+
+    test("Deleting tasks", () => {
+        document.body.innerHTML = html;
+        const taskContainer = document.querySelector('.task-container');
+        taskContainer.innerHTML = li;
+        setTaskList([{
+          description: "This is a task",
+          completed: false,
+          index: 1,
+        }])
+        const trashBtn = document.querySelector('#trashBtn');
+        console.log(trashBtn);
+        const event ={ target: trashBtn }
+
+        removeTask(event);
+
+        const list = taskList();
+        expect(list).toBeDefined();
+        expect(list).toHaveLength(0);
+        expect(list).toEqual([])
+    })
+
 })
 
 

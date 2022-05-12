@@ -5,7 +5,30 @@ let isEditedTask = false;
 // getting localStorage tasks
 let localTasks = JSON.parse(localStorage.getItem('tasks'));
 
-function tasksDisplay() {
+export const taskList = () => JSON.parse(localStorage.getItem('tasks')) || [];
+export const setTaskList = (taskList) => {
+  localStorage.setItem('tasks', JSON.stringify(taskList));
+};
+
+function resetIndex() {
+  localTasks.forEach((item, index) => {
+    item.index = index + 1;
+    localStorage.setItem('tasks', JSON.stringify(localTasks));
+  });
+}
+
+export const removeTask = (e) => {
+  const start = e.target;
+  const deleteTasks = parseInt(start.id, 10);
+
+  localTasks.splice(deleteTasks, 1);
+  // eslint-disable-next-line no-use-before-define
+  tasksDisplay();
+  resetIndex();
+  localStorage.setItem('tasks', JSON.stringify(localTasks));
+};
+
+export function tasksDisplay() {
   let li = '';
   if (localTasks) {
     localTasks.forEach((task, id) => {
@@ -27,7 +50,7 @@ function tasksDisplay() {
       `;
     });
   }
-  taskContainer.innerHTML = li;
+  taskContainer().innerHTML = li;
 
   document.querySelectorAll('.edit').forEach((el) => {
     el.addEventListener('click', (element) => {
@@ -38,27 +61,12 @@ function tasksDisplay() {
         (element, index) => index.toString() === taskIndex,
       )[0].description;
 
-      taskInput.value = result;
+      taskInput().value = result;
     });
   });
 
-  function resetIndex() {
-    localTasks.forEach((item, index) => {
-      item.index = index + 1;
-      localStorage.setItem('tasks', JSON.stringify(localTasks));
-    });
-  }
-
   document.querySelectorAll('.fa-trash').forEach((el) => {
-    el.addEventListener('click', (deleteIndex) => {
-      const start = deleteIndex.target;
-      const deleteTasks = parseInt(start.id, 10);
-
-      localTasks.splice(deleteTasks, 1);
-      tasksDisplay();
-      resetIndex();
-      localStorage.setItem('tasks', JSON.stringify(localTasks));
-    });
+    el.addEventListener('click', removeTask);
   });
 
   document.querySelectorAll('.check-input').forEach((el) => {
@@ -88,11 +96,9 @@ function tasksDisplay() {
     });
   });
 }
-tasksDisplay();
-
 
 export const addTasks = (e) => {
-  const EnteredTask = taskInput.value.trim();
+  const EnteredTask = taskInput().value.trim();
   if (e.key === 'Enter' && EnteredTask) {
     if (!isEditedTask) {
       if (!localTasks) {
@@ -110,11 +116,9 @@ export const addTasks = (e) => {
       isEditedTask = false;
       localTasks[editIndex].description = EnteredTask;
     }
-    taskInput.value = '';
+    taskInput().value = '';
     localStorage.setItem('tasks', JSON.stringify(localTasks));
 
     tasksDisplay();
   }
-}
-
-taskInput.addEventListener("keyup", addTasks)
+};
