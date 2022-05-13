@@ -8,7 +8,10 @@ let localTasks = JSON.parse(localStorage.getItem('tasks'));
 export const taskList = () => JSON.parse(localStorage.getItem('tasks')) || [];
 export const setTaskList = (taskList) => {
   localStorage.setItem('tasks', JSON.stringify(taskList));
+  localTasks = JSON.parse(localStorage.getItem('tasks'));
 };
+
+
 
 function resetIndex() {
   localTasks.forEach((item, index) => {
@@ -27,6 +30,48 @@ export const removeTask = (e) => {
   resetIndex();
   localStorage.setItem('tasks', JSON.stringify(localTasks));
 };
+
+const trashBtn = () => {
+  document.querySelectorAll('.fa-trash').forEach((el) => {
+    el.addEventListener('click', removeTask);
+  });
+};
+
+export const editTask = (event) => {
+  const taskIndex = event.target.id;
+  console.log(taskIndex)
+  editIndex = taskIndex;
+  isEditedTask = true;
+  const result = JSON.parse(localStorage.getItem('tasks')).filter(
+    (element, index) => index.toString() === taskIndex,
+  )[0].description;
+  taskInput().value = result;
+};
+
+const editButton = () => {
+  document.querySelectorAll('.edit').forEach((el) => {
+    el.addEventListener('click', editTask);
+  });
+};
+
+export const checkTask = (event) => {
+        const taskName = event.target.parentElement.lastElementChild;
+      if (event.target.checked) {
+        taskName.classList.add('checked');
+        localTasks[event.target.id].completed = true;
+
+      } else {
+        taskName.classList.remove('checked');
+        localTasks[event.target.id].completed = false;
+      }
+      localStorage.setItem('tasks', JSON.stringify(localTasks));
+}
+
+  const checkBtn = () => { 
+    document.querySelectorAll('.check-input').forEach((el) => {
+    el.addEventListener('click', checkTask)
+  });
+}
 
 export function tasksDisplay() {
   let li = '';
@@ -52,36 +97,10 @@ export function tasksDisplay() {
   }
   taskContainer().innerHTML = li;
 
-  document.querySelectorAll('.edit').forEach((el) => {
-    el.addEventListener('click', (element) => {
-      const taskIndex = element.target.id;
-      editIndex = taskIndex;
-      isEditedTask = true;
-      const result = JSON.parse(localStorage.getItem('tasks')).filter(
-        (element, index) => index.toString() === taskIndex,
-      )[0].description;
+  editButton();
+  trashBtn();
+  checkBtn();
 
-      taskInput().value = result;
-    });
-  });
-
-  document.querySelectorAll('.fa-trash').forEach((el) => {
-    el.addEventListener('click', removeTask);
-  });
-
-  document.querySelectorAll('.check-input').forEach((el) => {
-    el.addEventListener('click', (selectedTask) => {
-      const taskName = selectedTask.target.parentElement.lastElementChild;
-      if (selectedTask.target.checked) {
-        taskName.classList.add('checked');
-        localTasks[selectedTask.target.id].completed = true;
-      } else {
-        taskName.classList.remove('checked');
-        localTasks[selectedTask.target.id].completed = false;
-      }
-      localStorage.setItem('tasks', JSON.stringify(localTasks));
-    });
-  });
   //
   document.querySelectorAll('.more-icon').forEach((el) => {
     el.addEventListener('click', (selectedTask) => {
