@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "clear && set NODE_OPTIONS='--experimental-vm-modules' && jest --coverage",
+    "test": "jest",
     "build": "npx webpack",
     "start": "webpack serve --open"
   },
