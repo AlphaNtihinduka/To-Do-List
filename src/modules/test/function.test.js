@@ -1,5 +1,5 @@
 import { addTasks, removeTask, setTaskList, taskList } from "../function.js";
-import { taskContainer } from '../variable.js';
+// import { taskContainer } from '../variable.js';
 
 const html = `<div class="do-list-parent">
 <div class="heading">
@@ -56,7 +56,6 @@ describe("The addition and removal of tasks", () => {
           index: 1,
         }])
         const trashBtn = document.querySelector('#trashBtn');
-        console.log(trashBtn);
         const event ={ target: trashBtn }
 
         removeTask(event);
@@ -68,5 +67,4 @@ describe("The addition and removal of tasks", () => {
     })
 
 })
-
 
