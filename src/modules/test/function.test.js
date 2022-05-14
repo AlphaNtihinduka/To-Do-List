@@ -1,4 +1,6 @@
-import { addTasks, removeTask, setTaskList, taskList } from "../function.js";
+import {
+  addTasks, removeTask, setTaskList, taskList,
+} from '../function.js';
 // import { taskContainer } from '../variable.js';
 
 const html = `<div class="do-list-parent">
@@ -29,42 +31,40 @@ const li = `<li class="task-list">
     </div>
 </li>`;
 
-describe("The addition and removal of tasks", () => {
-    test("Adding tasks", () => {
-        document.body.innerHTML = html;
-        const event ={ key: 'Enter' }
+describe('The addition and removal of tasks', () => {
+  test('Adding tasks', () => {
+    document.body.innerHTML = html;
+    const event = { key: 'Enter' };
 
-        addTasks(event);
+    addTasks(event);
 
-        const list = taskList();
-        expect(list).toBeDefined();
-        expect(list).toHaveLength(1);
-        expect(list[0]).toEqual({
-          description: "This is a task",
-          completed: false,
-          index: 1,
-        })
-    })
+    const list = taskList();
+    expect(list).toBeDefined();
+    expect(list).toHaveLength(1);
+    expect(list[0]).toEqual({
+      description: 'This is a task',
+      completed: false,
+      index: 1,
+    });
+  });
 
-    test("Deleting tasks", () => {
-        document.body.innerHTML = html;
-        const taskContainer = document.querySelector('.task-container');
-        taskContainer.innerHTML = li;
-        setTaskList([{
-          description: "This is a task",
-          completed: false,
-          index: 1,
-        }])
-        const trashBtn = document.querySelector('#trashBtn');
-        const event ={ target: trashBtn }
+  test('Deleting tasks', () => {
+    document.body.innerHTML = html;
+    const taskContainer = document.querySelector('.task-container');
+    taskContainer.innerHTML = li;
+    setTaskList([{
+      description: 'This is a task',
+      completed: false,
+      index: 1,
+    }]);
+    const trashBtn = document.querySelector('#trashBtn');
+    const event = { target: trashBtn };
 
-        removeTask(event);
+    removeTask(event);
 
-        const list = taskList();
-        expect(list).toBeDefined();
-        expect(list).toHaveLength(0);
-        expect(list).toEqual([])
-    })
-
-})
-
+    const list = taskList();
+    expect(list).toBeDefined();
+    expect(list).toHaveLength(0);
+    expect(list).toEqual([]);
+  });
+});

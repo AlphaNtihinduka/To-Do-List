@@ -1,10 +1,10 @@
-   import {
-    checkTask, setTaskList, taskList, editTask
-  } from '../function.js'; 
+import {
+  checkTask, setTaskList, taskList, editTask,
+} from '../function.js';
 
-  // import { clearListener } from '../complete.js';
+// import { clearListener } from '../complete.js';
 
-  const html = `<div class="do-list-parent">
+const html = `<div class="do-list-parent">
   <div class="heading">
       <div class="title">Today's Task</div>
       <i class="fa fa-refresh"></i>
@@ -17,8 +17,8 @@
   </ul>
   <p class="clear-completed">Clear all completed</p>
   </div>`;
-  
-  const li = `<li class="task-list">
+
+const li = `<li class="task-list">
       <label for="id" class="label-checkbox">
       <input type="checkbox" class="check-input">
       <p class="task-name">Description</p>
@@ -32,70 +32,61 @@
       </div>
   </li>`;
 
+describe('check status and clear complete', () => {
+  test('check status', () => {
+    document.body.innerHTML = html;
+    const taskContainer = document.querySelector('.task-container');
+    taskContainer.innerHTML = li;
+    setTaskList([{
+      description: 'This is a task',
+      completed: false,
+      index: 1,
+    }]);
 
+    const checkInput = document.querySelector('.check-input');
+    checkInput.id = 0;
+    checkInput.checked = true;
+    const event = { target: checkInput };
+    checkTask(event);
 
-  describe("check status and clear complete", () => {
-    test("check status", () => {
-        document.body.innerHTML = html;
-        const taskContainer = document.querySelector('.task-container');
-        taskContainer.innerHTML = li;
-        setTaskList([{
-          description: "This is a task",
-          completed: false,
-          index: 1,
-        }])
+    const list = taskList();
+    expect(list).toBeDefined();
+    expect(list.length).toBe(1);
+    expect(list[0].completed).toBe(true);
+  });
 
-        const checkInput = document.querySelector(".check-input");
-        checkInput.id = 0;
-        checkInput.checked  = true;
-        const event = { target: checkInput }
-        checkTask(event);
+  test('Edit tasks', () => {
+    document.body.innerHTML = html;
+    const taskContainer = document.querySelector('.task-container');
+    taskContainer.innerHTML = li;
+    setTaskList([{
+      description: 'This is a task',
+      completed: false,
+      index: 1,
+    }]);
 
-        const list = taskList();
-        expect(list).toBeDefined();
-        expect(list.length).toBe(1);
-        expect(list[0].completed).toBe(true)
+    const editBtn = document.querySelector('.edit');
+    editBtn.id = 0;
+    editBtn.isEditedTask = true;
+    const event = { target: editBtn };
+    editTask(event);
+  });
+});
 
-    })
+// test("clear completed", () => {
+//   document.body.innerHTML = html;
+//   const taskContainer = document.querySelector('.task-container');
+//   taskContainer.innerHTML = li;
+//   setTaskList([{
+//     description: "This is a task",
+//     completed: false,
+//     index: 1,
+//   }])
 
-    test("Edit tasks", () => {
-      document.body.innerHTML = html;
-      const taskContainer = document.querySelector('.task-container');
-      taskContainer.innerHTML = li;
-      setTaskList([{
-        description: "This is a task",
-        completed: false,
-        index: 1,
-      }])
+//   const clearCompletedBtn = document.querySelector(".clear-completed");
+//   clearCompletedBtn.id = taskIndex;
+//   clearCompletedBtn.isEditedTask = true
+//   const event = {target: editBtn};
 
-      const editBtn = document.querySelector(".edit");
-      editBtn.id = 0;
-      editBtn.isEditedTask = true
-      const event = {target: editBtn};
-      console.log(editBtn.id)
-      editTask(event)
-
-      const list = setTaskList()
-      expect(list).toBeDefined()
-    })
-
-
-  })
-
-  // test("clear completed", () => {
-  //   document.body.innerHTML = html;
-  //   const taskContainer = document.querySelector('.task-container');
-  //   taskContainer.innerHTML = li;
-  //   setTaskList([{
-  //     description: "This is a task",
-  //     completed: false,
-  //     index: 1,
-  //   }])
-
-  //   const clearCompletedBtn = document.querySelector(".clear-completed");
-  //   clearCompletedBtn.id = taskIndex;
-  //   clearCompletedBtn.isEditedTask = true
-  //   const event = {target: editBtn};
-
-  //   editTask(event)
-  // })
+//   editTask(event)
+// })

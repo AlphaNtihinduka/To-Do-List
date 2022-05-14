@@ -11,8 +11,6 @@ export const setTaskList = (taskList) => {
   localTasks = JSON.parse(localStorage.getItem('tasks'));
 };
 
-
-
 function resetIndex() {
   localTasks.forEach((item, index) => {
     item.index = index + 1;
@@ -39,7 +37,6 @@ const trashBtn = () => {
 
 export const editTask = (event) => {
   const taskIndex = event.target.id;
-  console.log(taskIndex)
   editIndex = taskIndex;
   isEditedTask = true;
   const result = JSON.parse(localStorage.getItem('tasks')).filter(
@@ -55,23 +52,22 @@ const editButton = () => {
 };
 
 export const checkTask = (event) => {
-        const taskName = event.target.parentElement.lastElementChild;
-      if (event.target.checked) {
-        taskName.classList.add('checked');
-        localTasks[event.target.id].completed = true;
+  const taskName = event.target.parentElement.lastElementChild;
+  if (event.target.checked) {
+    taskName.classList.add('checked');
+    localTasks[event.target.id].completed = true;
+  } else {
+    taskName.classList.remove('checked');
+    localTasks[event.target.id].completed = false;
+  }
+  localStorage.setItem('tasks', JSON.stringify(localTasks));
+};
 
-      } else {
-        taskName.classList.remove('checked');
-        localTasks[event.target.id].completed = false;
-      }
-      localStorage.setItem('tasks', JSON.stringify(localTasks));
-}
-
-  const checkBtn = () => { 
-    document.querySelectorAll('.check-input').forEach((el) => {
-    el.addEventListener('click', checkTask)
+const checkBtn = () => {
+  document.querySelectorAll('.check-input').forEach((el) => {
+    el.addEventListener('click', checkTask);
   });
-}
+};
 
 export function tasksDisplay() {
   let li = '';
